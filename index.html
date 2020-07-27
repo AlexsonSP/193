@@ -153,6 +153,13 @@ height: 50px;
 <script id="rendered-js">
 let imgBase64 = null;  
 let labelsJson = null;
+let labelsOcorrencia = [];
+
+let incendio = false;
+let incendioVeiculo = false;
+let incendioVegetacao = false;
+let incendioEstrutural = false;
+
 $('#fileup').change(function () {
 
 
@@ -240,7 +247,7 @@ $("#submitbtn").click(function(event){
     "headers": {
         "Content-Type": "application/json"
     },
-    "data": JSON.stringify({"requests":[{"image":{"content":imgBase64},"features":[{"type":"LABEL_DETECTION"}]}]}),
+    "data": JSON.stringify({"requests":[{"image":{"content":imgBase64},"features":[{"maxResults": 50,"type":"LABEL_DETECTION"}]}]}),
     };
 
  
@@ -253,8 +260,8 @@ $("#submitbtn").click(function(event){
         //console.log("Hooray, it worked!");
         //console.log(response);
         labelsJson = response.responses[0].labelAnnotations;
-        console.log(labelsJson);
-        //selecionarTiposOcorrência(labelsJson);
+        //console.log(labelsJson);
+        selecionarTiposOcorrência(labelsJson);
         createTableLabels(labelsJson);
     });
 
@@ -284,19 +291,19 @@ var testeJson = {
           "labelAnnotations": [
             {
               "mid": "/m/01c8br",
-              "description": "Street",
+              "description": "Kids Fire Man",
               "score": 0.87294734,
               "topicality": 0.87294734
             },
             {
               "mid": "/m/06pg22",
-              "description": "Snapshot",
+              "description": "fire",
               "score": 0.8523099,
               "topicality": 0.8523099
             },
             {
               "mid": "/m/0dx1j",
-              "description": "Town",
+              "description": "VEHICLE",
               "score": 0.8481104,
               "topicality": 0.8481104
             },
@@ -316,19 +323,78 @@ var testeJson = {
         }
       ]
     };
-//labelsJson = testeJson.responses[0].labelAnnotations;
+labelsJson = testeJson.responses[0].labelAnnotations;
 //createTableLabels(labelsJson);
-
+selecionarTiposOcorrência(labelsJson);
 
 
 //Criar função para fazer ligação dos labels com ocorrências
+
 function selecionarTiposOcorrência(labelsJson){
-  let tiposOcorrencia = labelsJson['description'].map(function(tipoOcorrencia) {
 
-    return tipoOcorrencia;
-  }); 
-  console.log(tiposOcorrencia);
+  for (var i = 0; i < labelsJson.length; i++) {
+    var labelDescricao = labelsJson[i]['description'];
+    //console.log(labelDescricao);
 
+    //INCÊNDIO
+    if(labelDescricao.toUpperCase().includes('FIRE')
+      || labelDescricao.toUpperCase().includes('FLAME')
+      || labelDescricao.toUpperCase().includes('HEAT')
+      || labelDescricao.toUpperCase().includes('SMOKE')
+      || labelDescricao.toUpperCase().includes('EXPLOSION')
+      ){
+      //console.log(labelDescricao);
+      //labelsOcorrencia.push('INCÊNDIO');
+      incendio = true;
+    }
+
+    //VEGETAÇÃO
+    if(labelDescricao.toUpperCase().includes('VEGETATION')
+      || labelDescricao.toUpperCase().includes('TREE')
+      || labelDescricao.toUpperCase().includes('GRASS')
+      || labelDescricao.toUpperCase().includes('NATURE')
+      ){
+      //console.log(labelDescricao);
+      //labelsOcorrencia.push('VEGETAÇÃO');
+      incendioVegetacao = true;
+    }
+
+    //CARROS
+    if(labelDescricao.toUpperCase().includes('VEHICLE')
+      || labelDescricao.toUpperCase().includes('TRANSPORT')
+      || labelDescricao.toUpperCase().includes('CAR')
+      || labelDescricao.toUpperCase().includes('BUS')
+      ){
+      //console.log(labelDescricao);
+      //labelsOcorrencia.push('VEÍCULO');
+      incendioVeiculo = true;
+    }
+
+    //RESIDENCIA
+    if(labelDescricao.toUpperCase().includes('ROOF')
+      || labelDescricao.toUpperCase().includes('HOUSE')
+      || labelDescricao.toUpperCase().includes('ARCHITECTURE')
+      || labelDescricao.toUpperCase().includes('HOME')
+      || labelDescricao.toUpperCase().includes('BUILDING')
+      || labelDescricao.toUpperCase().includes('RESIDENTIAL')
+      || labelDescricao.toUpperCase().includes('FACADE')
+      || labelDescricao.toUpperCase().includes('APARTMENT')
+      || labelDescricao.toUpperCase().includes('NEIGHBOURHOODNeighbourhood')
+      || labelDescricao.toUpperCase().includes('CONDOMINIUM')
+      || labelDescricao.toUpperCase().includes('TOWER')
+      || labelDescricao.toUpperCase().includes('METROPOLITAN')
+      || labelDescricao.toUpperCase().includes('COMMERCIAL')
+      || labelDescricao.toUpperCase().includes('CITY')
+      || labelDescricao.toUpperCase().includes('METROPOLIS')
+      || labelDescricao.toUpperCase().includes('WINDOW')
+      ){
+      //console.log(labelDescricao);
+      //labelsOcorrencia.push('ESTRUTURAL');
+      incendioEstrutural = true;
+    }
+  }
+
+  //console.log(labelsOcorrencia);
 }
 
 
