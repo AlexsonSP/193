@@ -315,7 +315,7 @@ var testeJson = {
             },
             {
               "mid": "/m/01lwf0",
-              "description": "Alley",
+              "description": "home",
               "score": 0.7133322,
               "topicality": 0.7133322
             }
@@ -331,6 +331,10 @@ selecionarTiposOcorrência(labelsJson);
 //Criar função para fazer ligação dos labels com ocorrências
 
 function selecionarTiposOcorrência(labelsJson){
+
+  //definir tipo de ocorência
+
+
 
   for (var i = 0; i < labelsJson.length; i++) {
     var labelDescricao = labelsJson[i]['description'];
@@ -379,7 +383,7 @@ function selecionarTiposOcorrência(labelsJson){
       || labelDescricao.toUpperCase().includes('RESIDENTIAL')
       || labelDescricao.toUpperCase().includes('FACADE')
       || labelDescricao.toUpperCase().includes('APARTMENT')
-      || labelDescricao.toUpperCase().includes('NEIGHBOURHOODNeighbourhood')
+      || labelDescricao.toUpperCase().includes('NEIGHBOURHOOD')
       || labelDescricao.toUpperCase().includes('CONDOMINIUM')
       || labelDescricao.toUpperCase().includes('TOWER')
       || labelDescricao.toUpperCase().includes('METROPOLITAN')
@@ -394,7 +398,31 @@ function selecionarTiposOcorrência(labelsJson){
     }
   }
 
+
   //console.log(labelsOcorrencia);
+  tipoIncendio()
+}
+
+
+//função para confirmar ocorrência
+//verificar se imagem foi retirada da WEB
+//verificar objetos na cena
+
+
+//função para definir tipo de ocorrência
+function tipoIncendio(){
+  if(incendio){
+    if(incendioEstrutural){
+      console.log('Ocorrência confirmada de incêndio em estruturas.');
+    }
+    if(incendioVegetacao){
+      console.log('Ocorrência confirmada de incêndio em vegetação.');
+    }
+    if(incendioVeiculo){
+      console.log('Ocorrência confirmada de incêndio em veículo');
+    }
+    
+  }
 }
 
 
