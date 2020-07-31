@@ -54,8 +54,8 @@ $('#fileup').change(function () {
     $(".imgupload.stop").hide("slow");
     $(".imgupload.ok").show("slow");
 
-    $('#namefile').css({ "color": "green", "font-weight": 700 });
-    $('#namefile').html(filename);
+    //$('#namefile').css({ "color": "green", "font-weight": 700 });
+    //$('#namefile').html(filename);
   }
 
 
