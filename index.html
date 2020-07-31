@@ -21,8 +21,15 @@
 	<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="assets/css/material-bootstrap-wizard.css" rel="stylesheet" />
 
-	<!-- CSS Just for demo purpose, don't include it in your project -->
-	<link href="assets/css/demo.css" rel="stylesheet" />
+
+
+
+	
+
+
+	<link href="assets/css/custom.css" rel="stylesheet" />
+	
+
 </head>
 
 <body>
@@ -41,7 +48,7 @@
 		                        	<h3 class="wizard-title">
 										Abertura de Ocorrência
 		                        	</h3>
-									<h5>Tire ou escolha uma foto para ajudar na verificação da sua ocorrência.</h5>
+									<h5>Preencha os dados da melhor forma possível, para melhor ser atendido.</h5>
 		                    	</div>
 								<div class="wizard-navigation">
 									<ul>
@@ -54,48 +61,40 @@
 		                        <div class="tab-content">
 		                            <div class="tab-pane" id="about">
 		                              <div class="row">
-		                                	<h4 class="info-text"> Let's start with the basic information (with validation)</h4>
-		                                	<div class="col-sm-4 col-sm-offset-1">
-		                                    	<div class="picture-container">
-		                                        	<div class="picture">
-                                        				<img src="assets/img/default-avatar.png" class="picture-src" id="wizardPicturePreview" title=""/>
-		                                            	<input type="file" id="wizard-picture">
-		                                        	</div>
-		                                        	<h6>Choose Picture</h6>
-		                                    	</div>
-		                                	</div>
-		                                	<div class="col-sm-6">
-												<div class="input-group">
-													<span class="input-group-addon">
-														<i class="material-icons">face</i>
-													</span>
-													<div class="form-group label-floating">
-			                                          <label class="control-label">First Name <small>(required)</small></label>
-			                                          <input name="firstname" type="text" class="form-control">
-			                                        </div>
+											<div class="container center">
+												<div class="row">
+												<div class="col-md-12">
+												<h1 class="white">Abertura de Ocorrência</h1>
+												<p class="white">Tire ou escolha uma foto para ajudar na verificação da sua ocorrência.</p>
 												</div>
-
-												<div class="input-group">
-													<span class="input-group-addon">
-														<i class="material-icons">record_voice_over</i>
-													</span>
-													<div class="form-group label-floating">
-													  <label class="control-label">Last Name <small>(required)</small></label>
-													  <input name="lastname" type="text" class="form-control">
-													</div>
 												</div>
-		                                	</div>
-		                                	<div class="col-sm-10 col-sm-offset-1">
-												<div class="input-group">
-													<span class="input-group-addon">
-														<i class="material-icons">email</i>
-													</span>
-													<div class="form-group label-floating">
-			                                            <label class="control-label">Email <small>(required)</small></label>
-			                                            <input name="email" type="email" class="form-control">
-			                                        </div>
+												<form name="upload" method="post" action="#" enctype="multipart/form-data" accept-charset="utf-8">
+												<div class="row">
+												<div class="col-md-6 col-md-offset-3 center">
+												<div class="btn-container">
+												
+												<h1 class="imgupload"><i class="fa fa-file-image-o"></i></h1>
+												<h1 class="imgupload ok"><i class="fa fa-check"></i></h1>
+												<h1 class="imgupload stop"><i class="fa fa-times"></i></h1>
+												
+												<p id="namefile">Permitimos apenas esses formatos de fotos: (jpg,jpeg,bmp,png)</p>
+												
+												<button type="button" id="btnup" class="btn btn-primary btn-lg">Escolha a foto da ocorrência!</button>
+												
+												<input type="file" value="" name="fileup" id="fileup">
 												</div>
-		                                	</div>
+												</div>
+												</div>
+												
+												<div class="row">
+												<div class="col-md-12">
+												
+												<input type="submit" value="Submit!" class="btn btn-primary" id="submitbtn">
+												<button type="button" class="btn btn-default" disabled="disabled" id="fakebtn">Abrir ocorrência! <i class="fa fa-minus-circle"></i></button>
+												</div>
+												</div>
+												</form>
+											</div>
 		                            	</div>
 		                            </div>
 		                            <div class="tab-pane" id="account">
@@ -211,5 +210,10 @@
 
     <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
 	<script src="assets/js/jquery.validate.min.js"></script>
+
+	<!--  Plugin for the Wizard -->
+	<script src="assets/js/custom.js"></script>
+	<script src="https://static.codepen.io/assets/editor/iframe/iframeRefreshCSS-e03f509ba0a671350b4b363ff105b2eb009850f34a2b4deaadaa63ed5d970b37.js"></script>
+
 
 </html>
