@@ -15,6 +15,7 @@ let incendio = false;
 let incendioVeiculo = false;
 let incendioVegetacao = false;
 let incendioEstrutural = false;
+let incendioGeral = false;
 
 $('#fileup').change(function () {
 
@@ -122,7 +123,7 @@ function enviarFoto(){
       //console.log("Hooray, it worked!");
       //console.log(response);
       labelsJson = response.responses[0].labelAnnotations;
-      //console.log(labelsJson);
+      console.log(labelsJson);
       selecionarTiposOcorrência(labelsJson);
       createTableLabels(labelsJson);
   });
@@ -258,6 +259,9 @@ function selecionarTiposOcorrência(labelsJson){
       incendioEstrutural = true;
     }
   }
+  if (incendio && !(incendioEstrutural || incendioVegetacao || incendioVeiculo)){
+    incendioGeral = true;
+  }
 
 
   
@@ -284,6 +288,10 @@ function tipoIncendio(){
       console.log('Ocorrência confirmada de incêndio em veículo');
       return true;
     }
+    if(incendioGeral){
+      console.log('Ocorrência confirmada de incêndio.');
+      return true;
+    }
     return false;
     
   }
@@ -291,9 +299,12 @@ function tipoIncendio(){
 
 
 function createTableLabels(labelAnnotations){
- 
+  let conteudo='';
+
+  //Exibir tabela com a análise da imagem
+  /*
     //console.log('Tamanho array: '+ labelAnnotations.length);
-    let conteudo = `<table class="table">
+    conteudo = `<table class="table">
         <thead>
           <tr>
             <th colspan="3" class="center">Análise da imagem:</th>
@@ -318,33 +329,51 @@ function createTableLabels(labelAnnotations){
     
     conteudo +=`
       </tbody>
+      </table>
       `;
 
+      */
     //console.log(labelsOcorrencia);
   if(!tipoIncendio()){
-    conteudo +=`
-        <tfoot>
-        <tr>
-          <td colspan="3">Sua foto não foi classificada automaticamente, tire/selecione outra foto ou preencha os dados manualmente</td>
-        </tr>
-      </tfoot>
-      `;
+    $(".imgupload").hide("slow");
+    $(".imgupload.ok").hide("slow");
+    $(".imgupload.stop").show("slow");
+
+    $('#namefile').css({ "color": "red", "font-weight": 700 });
+    $('#namefile').html("Sua foto não foi classificada automaticamente, tire/selecione outra foto!");
+
   } else{
-    conteudo +=`
-        <tfoot>
-        <tr>
-          <td colspan="3">Sua foto foi classificada automaticamente como uma ocorrência de bombeiros!</td>
-        </tr>
-      </tfoot>
-      `;
+
+      if(incendioEstrutural){
+        conteudo +=`
+          <h5>Incêndio em estruturas!</h5>
+          <img alt="Foto Incêndio em estruturas" src="./assets/img/incendio-estruturas-512.png" width="128" height="128">
+          `;
+      }
+      if(incendioVegetacao){
+        conteudo +=`
+          <h5>Incêndio em Vegetação!</h5>
+          <img alt="Foto Incêndio em vegetação." src="./assets/img/incendio-vegetacao-512.png" width="128" height="128">
+          `;
+      }
+      if(incendioVeiculo){
+        conteudo +=`
+          <h5>Incêndio em veículo!</h5>
+          <img alt="Foto Incêndio em veículo" src="./assets/img/incendio-veiculo-512.png" width="128" height="128">
+          `;
+      }
+      if(incendioGeral){
+        conteudo +=`
+          <h5>Incêndio!</h5>
+          <img alt="Foto Incêndio" src="./assets/img/incendio-geral-512.png" width="128" height="128">
+          `;
+      }
+      $('.btn-container').html(conteudo);
   }
 
-  conteudo +=`
-        </table>
-        `;
 
     
-    $('.btn-container').html(conteudo);
+    //$('.btn-container').html(conteudo);
 }
 
 
@@ -397,16 +426,18 @@ function showPosition(position) {
 
 function initMap() {
   const map = new google.maps.Map(document.getElementById("mapholder"), {
-  zoom: 18,
+  zoom: 16,
   center: deviceLocalization,
   disableDefaultUI: true
   });
   const geocoder = new google.maps.Geocoder();
   const infowindow = new google.maps.InfoWindow();
-  
-  document.getElementById("mapholder").addEventListener("load", () => {
   geocodeLatLng(geocoder, map, infowindow);
-  });
+
+
+  //document.getElementById("mapholder").addEventListener("load", () => {
+  //geocodeLatLng(geocoder, map, infowindow);
+  //});
   
 }
 
