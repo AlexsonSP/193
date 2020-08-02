@@ -1,18 +1,24 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/favicon.ico">
-
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
 	<title>193 Emergência</title>
+	<meta name="193 Emergencia" content="bombeiros-emergencia-socorro">
+	<link rel="icon" href="assets/img/icons/icon-72x72.png" type="image/x-icon" />
 
-	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
+	<link rel="manifest" href="/manifest.json">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="193 Emergência">
+	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/icons/icon-76x76.png">
+	<meta name="description" content="193 Emergência">
+	<meta name="theme-color" content="#2F3BA2" />
 
-	<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png" />
-	<link rel="icon" type="image/png" href="assets/img/favicon.png" />
 
+	
 	<!--     Fonts and icons     -->
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
@@ -39,7 +45,7 @@
 
 <body>
 	
-	<div class="image-container set-full-height" style="background-image: url('assets/img/Distintivo-CBMES-2018.png')">
+	<div class="image-container set-full-height" style="background-image: url('assets/img/icons/Distintivo-CBMES-2018.png')">
 		<!--   Big container   -->
 	    <div class="container">
 	        <div class="row">
@@ -60,7 +66,7 @@
 								<div class="wizard-navigation">
 									<ul>
 			                            <li><a href="#about" data-toggle="tab">Foto</a></li>
-			                            <li><a href="#account" data-toggle="tab">local</a></li>
+			                            <li><a href="#account" data-toggle="tab">Descrição</a></li>
 			                            <li><a href="#address" data-toggle="tab">Confirmação</a></li>
 			                        </ul>
 								</div>
@@ -69,83 +75,51 @@
 		                            <div class="tab-pane" id="about">
 		                        		<div class="row">
 											<div class="col-sm-10 col-sm-offset-1">
-													<form name="upload" method="post" action="#" enctype="multipart/form-data" accept-charset="utf-8">
-														<div class="row">
-															<div class="col-md-12 center">
-																<div class="btn-container">
-																	<div class="imgupload"><i class="fa fa-camera-retro fa-5x"></i></div>
-																	<div class="imgupload ok">Processando foto...<br><i class="fa fa-spinner fa-spin fa-5x fa-fw"></i></div>
-																	<div class="imgupload stop"><i class="fa fa-times fa-5x"></i></div>
-																	<p id="namefile"></p>
-																	<button type="button" id="btnup" class="btn btn-primary btn-lg">Adicionar foto!</button>
-																	<input type="file" value="" name="fileup" id="fileup">
-																</div>
-																
+												<form name="upload" method="post" action="#" enctype="multipart/form-data" accept-charset="utf-8">
+													<div class="row">
+														<div class="col-md-12 center">
+															<div class="btn-container">
+																<div class="imgupload"><i class="fa fa-camera-retro fa-5x"></i></div>
+																<div class="imgupload ok">Analisando foto...<br><i class="fa fa-spinner fa-spin fa-5x fa-fw"></i></div>
+																<div class="imgupload stop"><i class="fa fa-times fa-5x"></i></div>
+																<p id="namefile"></p>
+																<button type="button" id="btnup" class="btn btn-primary btn-lg">Adicionar foto!</button>
+																<input type="file" value="" name="fileup" id="fileup">
 															</div>
+															
 														</div>
-													</form>
+													</div>
+												</form>
 											</div>
 		                            	</div>
 		                            </div>
 		                            <div class="tab-pane" id="account">
 		                                <div class="row">
-		                                    <div class="col-sm-10 col-sm-offset-1">
-												<p id="map"></p>
-		                                        <div id="mapholder"></div>
+		                                    <div class="col-sm-12 col-sm-offset-1">
+	                                    		<div class="form-group">
+		                                            <label>Descrição da ocorrência</label>
+		                                            <textarea class="form-control" placeholder="" rows="6"></textarea>
+		                                        </div>
 		                                    </div>
 		                                </div>
 		                            </div>
 		                            <div class="tab-pane" id="address">
 		                                <div class="row">
-		                                    <div class="col-sm-12">
-		                                        <h4 class="info-text"> Are you living in a nice area? </h4>
-		                                    </div>
-		                                    <div class="col-sm-7 col-sm-offset-1">
-	                                        	<div class="form-group label-floating">
-	                                        		<label class="control-label">Street Name</label>
-	                                    			<input type="text" class="form-control">
-	                                        	</div>
-		                                    </div>
-		                                    <div class="col-sm-3">
-		                                        <div class="form-group label-floating">
-		                                            <label class="control-label">Street Number</label>
-		                                            <input type="text" class="form-control">
-		                                        </div>
-		                                    </div>
-		                                    <div class="col-sm-5 col-sm-offset-1">
-		                                        <div class="form-group label-floating">
-		                                            <label class="control-label">City</label>
-		                                            <input type="text" class="form-control">
-		                                        </div>
-		                                    </div>
-		                                    <div class="col-sm-5">
-		                                        <div class="form-group label-floating">
-		                                            <label class="control-label">Country</label>
-	                                            	<select name="country" class="form-control">
-														<option disabled="" selected=""></option>
-	                                                	<option value="Afghanistan"> Afghanistan </option>
-	                                                	<option value="Albania"> Albania </option>
-	                                                	<option value="Algeria"> Algeria </option>
-	                                                	<option value="American Samoa"> American Samoa </option>
-	                                                	<option value="Andorra"> Andorra </option>
-	                                                	<option value="Angola"> Angola </option>
-	                                                	<option value="Anguilla"> Anguilla </option>
-	                                                	<option value="Antarctica"> Antarctica </option>
-	                                                	<option value="...">...</option>
-	                                            	</select>
-		                                        </div>
+											<div class="col-sm-10 col-sm-offset-1">
+												<p id="map"></p>
+		                                        <div id="mapholder"></div>
 		                                    </div>
 		                                </div>
 		                            </div>
 		                        </div>
 		                        <div class="wizard-footer">
 		                            <div class="pull-right">
-		                                <input type='button' class='btn btn-next btn-fill btn-success btn-wd' name='next' value='>>>' />
-		                                <input type='button' class='btn btn-finish btn-fill btn-success btn-wd' name='finish' value='Finalizar' />
+		                                <input type='button' class='btn btn-next btn-fill btn-success btn-wd fa fa-input' name='next' value='&#xf061' />
+		                                <input type='button' class='btn btn-finish btn-fill btn-success btn-wd fa fa-input' name='finish' value='&#xf00c' />
 		                            </div>
 
 		                            <div class="pull-left">
-		                                <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='<<<' />
+		                                <input type='button' class='btn btn-previous btn-fill btn-default btn-wd fa fa-input' name='previous' value='&#xf060' />
 		                            </div>
 		                            <div class="clearfix"></div>
 		                        </div>
@@ -173,7 +147,17 @@
 	<!--  Plugin for the Wizard -->
 	<script src="assets/js/custom.js"></script>
 
-
+	<script>
+		//Register service worker.
+		if ('serviceWorker' in navigator) {
+		  window.addEventListener('load', () => {
+		  navigator.serviceWorker.register('/service-worker.js')
+			.then((reg) => {
+			  console.log('Service worker registered.', reg);
+			});
+		  });
+		}
+	  </script>
 	
 
 </html>

@@ -352,7 +352,7 @@ h2.title {
     display: none; }
   .wizard-card .wizard-header {
     text-align: center;
-    padding: 25px 0 35px; }
+    padding: 5px 0 5px; }
     .wizard-card .wizard-header h5 {
       margin: 5px 0 0; }
   .wizard-card .nav-pills > li {
@@ -693,7 +693,7 @@ label.control-label {
 
 .form-group {
   padding-bottom: 7px;
-  margin: 27px 0 0 0; }
+  margin: 0px 0 0 0; }
   .form-group .form-control {
     margin-bottom: 7px; }
     .form-group .form-control::-moz-placeholder {
@@ -893,9 +893,9 @@ select.form-control {
   border: none;
   border-radius: 3px;
   position: relative;
-  padding: 12px 30px;
+  padding: 00px 30px;
   margin: 10px 1px;
-  font-size: 12px;
+  font-size: 25px;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0;
