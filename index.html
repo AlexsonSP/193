@@ -28,13 +28,19 @@
 
 
 	<link href="assets/css/custom.css" rel="stylesheet" />
-	
+
+	<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC06O_XUzo12goOrLKOOTtczAnXOoGgOiw&callback=getLocation&libraries=&v=weekly"
+      defer
+	></script>
+
 
 </head>
 
 <body>
+	
 	<div class="image-container set-full-height" style="background-image: url('assets/img/Distintivo-CBMES-2018.png')">
-	    <!--   Big container   -->
+		<!--   Big container   -->
 	    <div class="container">
 	        <div class="row">
 		        <div class="col-sm-8 col-sm-offset-2">
@@ -49,7 +55,8 @@
 										Abertura de Ocorrência
 		                        	</h3>
 									<h5>Preencha os dados da melhor forma possível, para um melhor atendimento.</h5>
-		                    	</div>
+									
+								</div>
 								<div class="wizard-navigation">
 									<ul>
 			                            <li><a href="#about" data-toggle="tab">Foto</a></li>
@@ -73,6 +80,7 @@
 																	<button type="button" id="btnup" class="btn btn-primary btn-lg">Adicionar foto!</button>
 																	<input type="file" value="" name="fileup" id="fileup">
 																</div>
+																
 															</div>
 														</div>
 													</form>
@@ -80,36 +88,10 @@
 		                            	</div>
 		                            </div>
 		                            <div class="tab-pane" id="account">
-		                                <h4 class="info-text"> What are you doing? (checkboxes) </h4>
 		                                <div class="row">
 		                                    <div class="col-sm-10 col-sm-offset-1">
-		                                        <div class="col-sm-4">
-		                                            <div class="choice" data-toggle="wizard-checkbox">
-		                                                <input type="checkbox" name="jobb" value="Design">
-		                                                <div class="icon">
-		                                                    <i class="fa fa-pencil"></i>
-		                                                </div>
-		                                                <h6>Design</h6>
-		                                            </div>
-		                                        </div>
-		                                        <div class="col-sm-4">
-		                                            <div class="choice" data-toggle="wizard-checkbox">
-		                                                <input type="checkbox" name="jobb" value="Code">
-		                                                <div class="icon">
-		                                                    <i class="fa fa-terminal"></i>
-		                                                </div>
-		                                                <h6>Code</h6>
-		                                            </div>
-		                                        </div>
-		                                        <div class="col-sm-4">
-		                                            <div class="choice" data-toggle="wizard-checkbox">
-		                                                <input type="checkbox" name="jobb" value="Develop">
-		                                                <div class="icon">
-		                                                    <i class="fa fa-laptop"></i>
-		                                                </div>
-		                                                <h6>Develop</h6>
-		                                            </div>
-		                                        </div>
+												<p id="map"></p>
+		                                        <div id="mapholder"></div>
 		                                    </div>
 		                                </div>
 		                            </div>
@@ -173,12 +155,6 @@
 		        </div>
 	        </div><!-- end row -->
 	    </div> <!--  big container -->
-
-	    <div class="footer">
-	        <div class="container text-center">
-				<a href="http://cb.es.gov.br">CORPO DE BOMBEIROS MILITAR DO ESTADO DO ESPÍRITO SANTO.</a>
-	        </div>
-	    </div>
 	</div>
 
 </body>
@@ -193,8 +169,11 @@
     <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
 	<script src="assets/js/jquery.validate.min.js"></script>
 
+
 	<!--  Plugin for the Wizard -->
 	<script src="assets/js/custom.js"></script>
 
+
+	
 
 </html>

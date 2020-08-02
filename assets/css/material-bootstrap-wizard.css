@@ -342,7 +342,7 @@ h2.title {
   .wizard-card .picture-src {
     width: 100%; }
   .wizard-card .tab-content {
-    min-height: 340px;
+    min-height: 140px;
     padding: 20px 15px; }
   .wizard-card .wizard-footer {
     padding: 0 15px; }

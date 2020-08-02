@@ -1,8 +1,9 @@
-window.console = window.console || function(t) {};
-
+//window.console = window.console || function(t) {};
+/*
 if (document.location.search.match(/type=embed/gi)) {
     window.parent.postMessage("resize", "*");
 }
+*/
 
 
 
@@ -259,10 +260,7 @@ function selecionarTiposOcorrência(labelsJson){
   }
 
 
-  //console.log(labelsOcorrencia);
-  if(!tipoIncendio()){
-    console.log('Sua foto não foi aceita. Tente tirar uma foto melhor.');
-  }
+  
 }
 
 
@@ -297,11 +295,14 @@ function createTableLabels(labelAnnotations){
     //console.log('Tamanho array: '+ labelAnnotations.length);
     let conteudo = `<table class="table">
         <thead>
-            <tr>
+          <tr>
+            <th colspan="3" class="center">Análise da imagem:</th>
+          </tr>
+          <tr>
             <th scope="col">#</th>
-            <th scope="col">Descrição</th>
-            <th scope="col">Pontuação</th>
-            </tr>
+            <th scope="col" class="center">Descrição</th>
+            <th scope="col" class="center">Precisão</th>
+          </tr>
         </thead>
         <tbody>`;
 
@@ -311,15 +312,130 @@ function createTableLabels(labelAnnotations){
           <tr>
           <th scope="row">`+i+`</th>
           <td>`+labelAnnotations[i]['description']+`</td>
-          <td>`+labelAnnotations[i]['score']+`</td>
+          <td>`+((labelAnnotations[i]['score'])*100).toFixed(2)+`%</td>
           </tr>`;
     }
+    
     conteudo +=`
-        </tbody>
-        </table>`;
+      </tbody>
+      `;
+
+    //console.log(labelsOcorrencia);
+  if(!tipoIncendio()){
+    conteudo +=`
+        <tfoot>
+        <tr>
+          <td colspan="3">Sua foto não foi classificada automaticamente, tire/selecione outra foto ou preencha os dados manualmente</td>
+        </tr>
+      </tfoot>
+      `;
+  } else{
+    conteudo +=`
+        <tfoot>
+        <tr>
+          <td colspan="3">Sua foto foi classificada automaticamente como uma ocorrência de bombeiros!</td>
+        </tr>
+      </tfoot>
+      `;
+  }
+
+  conteudo +=`
+        </table>
+        `;
+
+    
     $('.btn-container').html(conteudo);
 }
 
+
+
+
+
+
+
+function showError(error)
+  {
+  switch(error.code)
+    {
+    case error.PERMISSION_DENIED:
+      x.innerHTML="Usuário rejeitou a solicitação de Geolocalização."
+      break;
+    case error.POSITION_UNAVAILABLE:
+      x.innerHTML="Localização indisponível."
+      break;
+    case error.TIMEOUT:
+      x.innerHTML="O tempo da requisição expirou."
+      break;
+    case error.UNKNOWN_ERROR:
+      x.innerHTML="Algum erro desconhecido aconteceu."
+      break;
+    }
+}
+
+
+
+//getLocation();
+var deviceLatitude = -20.3129238;
+var deviceLongitude = -40.2912268;
+var deviceLocalization = null;
+deviceLocalization = { lat: deviceLatitude, lng: deviceLongitude };
+var map = null;
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition,showError);
+  }
+  else { console.log('Navegador não suporta navegação') }
+}
+function showPosition(position) {
+  deviceLatitude = position.coords.latitude;
+  deviceLongitude = position.coords.longitude;
+  deviceLocalization = { lat: deviceLatitude, lng: deviceLongitude };
+  console.log('Latitude: ' + deviceLatitude + ' Longitude: ' + deviceLongitude);
+  initMap();
+}
+"use strict";
+
+function initMap() {
+  const map = new google.maps.Map(document.getElementById("mapholder"), {
+  zoom: 18,
+  center: deviceLocalization,
+  disableDefaultUI: true
+  });
+  const geocoder = new google.maps.Geocoder();
+  const infowindow = new google.maps.InfoWindow();
+  
+  document.getElementById("mapholder").addEventListener("load", () => {
+  geocodeLatLng(geocoder, map, infowindow);
+  });
+  
+}
+
+function geocodeLatLng(geocoder, map, infowindow) {
+  
+  geocoder.geocode(
+  {
+    location: deviceLocalization
+  },
+  (results, status) => {
+    if (status === "OK") {
+    if (results[0]) {
+      console.log(results[0].formatted_address);
+      //map.setZoom(18);
+      const marker = new google.maps.Marker({
+      position: deviceLocalization,
+      map: map
+      });
+      infowindow.setContent(results[0].formatted_address);
+      infowindow.open(map, marker);
+    } else {
+      window.alert("No results found");
+    }
+    } else {
+    window.alert("Geocoder failed due to: " + status);
+    }
+  }
+  );
+}
 
 
 //# sourceURL=pen.js
